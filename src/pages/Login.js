@@ -1,5 +1,5 @@
-// import React, { useContext } from 'react';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
   const [login, setLogin] = useState({ inputEmail: '', inputPassword: '' });
@@ -22,9 +22,12 @@ function Login() {
     }
   };
 
+  const history = useHistory();
+
   const handleSubmit = () => {
     const { inputEmail } = login;
     localStorage.setItem('user', JSON.stringify({ email: inputEmail }));
+    history.push('/meals');
   };
 
   return (
