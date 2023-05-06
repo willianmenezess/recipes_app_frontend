@@ -22,6 +22,11 @@ function Login() {
     }
   };
 
+  const handleSubmit = () => {
+    const { inputEmail } = login;
+    localStorage.setItem('user', JSON.stringify({ email: inputEmail }));
+  };
+
   return (
     <section>
       <form>
@@ -53,7 +58,7 @@ function Login() {
           type="submit"
           data-testid="login-submit-btn"
           disabled={ isDisabled }
-          // onClick={}
+          onClick={ handleSubmit }
         >
           Enter
 
