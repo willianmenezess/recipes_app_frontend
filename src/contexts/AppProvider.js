@@ -1,9 +1,9 @@
 import React, { useState, useMemo, createContext } from 'react';
 import PropTypes from 'prop-types';
 
-export const MyContext = createContext();
+export const AppContext = createContext();
 
-function Provider({ children }) {
+function AppProvider({ children }) {
   const [state1, setState1] = useState('');
 
   const values = useMemo(() => ({
@@ -12,14 +12,14 @@ function Provider({ children }) {
   }), [state1, setState1]);
 
   return (
-    <MyContext.Provider value={ values }>
+    <AppContext.Provider value={ values }>
       {children}
-    </MyContext.Provider>
+    </AppContext.Provider>
   );
 }
 
-Provider.propTypes = {
+AppProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default Provider;
+export default AppProvider;
