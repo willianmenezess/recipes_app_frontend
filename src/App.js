@@ -6,10 +6,11 @@ import RecipeDetails from './pages/RecipeDetails';
 import RecipeInProgress from './pages/RecipeInProgress';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Profile from './pages/Profile';
+import './App.css';
 
 function App() {
   return (
-    <section>
+    <section className="meals">
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route exact path="/meals" component={ Recipes } />
