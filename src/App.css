@@ -28,6 +28,16 @@
   transform-origin: 60px 78px;
 }
 */
+button.icon{
+  background-color: transparent;
+  border: 0 none;
+  padding: 10px;
+  font-size: 20px;
+  color: #646464;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+}
 
 .meals > .logo {
   animation: shake 1.5s infinite ease;
@@ -65,4 +75,18 @@
   100% {
     transform: rotate(-10deg);
   }
+}
+
+footer {
+  position: fixed;
+  display: flex;
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  transition: all 500ms;
+  bottom: 0;
+  justify-content:center ;
+  align-items: center;
+
 }
