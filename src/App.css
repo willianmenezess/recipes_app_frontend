@@ -28,15 +28,16 @@
   transform-origin: 60px 78px;
 }
 */
-button.icon{
+
+.icon {
   background-color: transparent;
   border: 0 none;
-  padding: 10px;
-  font-size: 20px;
-  color: #646464;
   border-radius: 5px;
+  color: #646464;
   cursor: pointer;
+  font-size: 20px;
   margin: 10px;
+  padding: 10px;
 }
 
 .meals > .logo {
@@ -78,15 +79,15 @@ button.icon{
 }
 
 footer {
-  position: fixed;
-  display: flex;
-  margin-top: 20px;
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  transition: all 500ms;
-  bottom: 0;
-  justify-content:center ;
   align-items: center;
+  bottom: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 10px;
+  position: fixed;
+  transition: all 500ms;
+  width: 100%;
 
 }
