@@ -11,8 +11,8 @@ import Recipes from './pages/Recipes';
 
 function App() {
   return (
-    <section>
-      <Switch className="meals">
+    <section className="meals">
+      <Switch>
         <Route exact path="/" component={ Login } />
         <Route exact path="/meals" component={ Recipes } />
         <Route exact path="/drinks" component={ Recipes } />
