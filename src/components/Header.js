@@ -1,18 +1,17 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 // import SearchBar from './SearchBar';
 
 function Header({ title, searchIconToggle }) {
   const history = useHistory();
   const redirect = () => history.push('/profile');
+  const [toggleSearchBar, setToggleSearchBar] = useState(false);
   return (
     <header>
-      {/* <section>
-        <SearchBar />
-      </section> */}
       <h1 data-testid="page-title">
         { title }
       </h1>
@@ -24,10 +23,19 @@ function Header({ title, searchIconToggle }) {
         <img src={ profileIcon } alt="profile icon" />
       </button>
       { searchIconToggle && (
-        <button src={ searchIcon } data-testid="search-top-btn">
+        <button
+          src={ searchIcon }
+          data-testid="search-top-btn"
+          onClick={ () => setToggleSearchBar(!toggleSearchBar) }
+        >
           <img src={ searchIcon } alt="search Icon" />
         </button>
       )}
+      {
+        toggleSearchBar && (
+          <SearchBar />
+        )
+      }
     </header>
   );
 }
