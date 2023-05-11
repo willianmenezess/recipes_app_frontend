@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
-// import SearchBar from './SearchBar';
 
 function Header({ title, searchIconToggle }) {
   const history = useHistory();
@@ -16,7 +15,6 @@ function Header({ title, searchIconToggle }) {
         { title }
       </h1>
       <button
-        src={ profileIcon }
         data-testid="profile-top-btn"
         onClick={ redirect }
       >
@@ -24,7 +22,6 @@ function Header({ title, searchIconToggle }) {
       </button>
       { searchIconToggle && (
         <button
-          src={ searchIcon }
           data-testid="search-top-btn"
           onClick={ () => setToggleSearchBar(!toggleSearchBar) }
         >
