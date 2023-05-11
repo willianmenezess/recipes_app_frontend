@@ -3,13 +3,16 @@ import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { render } from '@testing-library/react';
 import App from '../../App';
+import AppProvider from '../../contexts/AppProvider';
 
 const renderWithRouter = (path) => {
   const history = createBrowserHistory();
   history.push(path);
   const { ...resources } = render(
     <Router history={ history }>
-      <App />
+      <AppProvider>
+        <App />
+      </AppProvider>
     </Router>,
   );
   return { ...resources, history };

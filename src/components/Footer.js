@@ -8,7 +8,6 @@ function Footer() {
   const history = useHistory();
 
   const handleClickMealDrink = (name) => {
-    console.log('name');
     if (name === 'drinks') {
       history.push('/drinks');
     }
