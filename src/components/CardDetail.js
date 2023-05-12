@@ -10,8 +10,6 @@ function CardDetail({ dataDetails, route, recomendations }) {
     border: '1px solid black',
   };
 
-  console.log(recomendations);
-
   return (
     <>
       <section>
@@ -69,21 +67,45 @@ function CardDetail({ dataDetails, route, recomendations }) {
           />)}
         </div>
         <div>
+
           <h3>Recomendations</h3>
-          { route === 'meal' && (
-            recomendations.map((recipe, index) => (
-              <div key={ index }>
-                <img src={ recipe.strMealThumb } alt={ recipe.strMeal } />
-                <p data-testid={ `${index}-recomendation-title` }>{ recipe.strMeal }</p>
-              </div>
-            )))}
-          { route === 'drink' && (
-            recomendations.map((recipe, index) => (
-              <div key={ index }>
-                <img src={ recipe.strDrinkThumb } alt={ recipe.strDrink } />
-                <p data-testid={ `${index}-recomendation-title` }>{ recipe.strDrink }</p>
-              </div>
-            )))}
+
+          <div className="carousel">
+            { route === 'drink' && (
+              recomendations.map((recipe, index) => (
+                <div key={ index } data-testid={ `${index}-recommendation-card` }>
+                  <img
+                    src={ recipe.strMealThumb }
+                    alt={ recipe.strMeal }
+                    className="image-recomendation"
+                  />
+                  <p
+                    data-testid={ `${index}-recommendation-title` }
+                  >
+                    { recipe.strMeal }
+
+                  </p>
+                </div>
+              ))
+            )}
+            { route === 'meal' && (
+              recomendations.map((recipe, index) => (
+                <div key={ index } data-testid={ `${index}-recommendation-card` }>
+                  <img
+                    src={ recipe.strDrinkThumb }
+                    alt={ recipe.strDrink }
+                    className="image-recomendation"
+                  />
+                  <p
+                    data-testid={ `${index}-recommendation-title` }
+                  >
+                    { recipe.strDrink }
+
+                  </p>
+                </div>
+              ))
+            )}
+          </div>
         </div>
       </section>
       <footer>
@@ -112,12 +134,7 @@ CardDetail.propTypes = {
     strInstructions: PropTypes.string,
     strYoutube: PropTypes.string,
   }).isRequired,
-  recomendations: PropTypes.shape({
-    strMealThumb: PropTypes.string,
-    strMeal: PropTypes.string,
-    strDrinkThumb: PropTypes.string,
-    strDrink: PropTypes.string,
-  }).isRequired,
+  recomendations: PropTypes.shape.isRequired,
 
 };
 

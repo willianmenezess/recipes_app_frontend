@@ -38,43 +38,6 @@ function RecipeDetails() {
   return (
     <section>
       { pathname === `/meals/${id}` && (
-        // <div>
-        //   <img
-        //     src={ dataDetails.strMealThumb }
-        //     alt={ dataDetails.strMeal }
-        //     data-testid="recipe-photo"
-        //     style={ styleImage }
-        //   />
-        //   <h1 data-testid="recipe-title">{ dataDetails.strMeal }</h1>
-        //   <h2 data-testid="recipe-category">{ dataDetails.strCategory }</h2>
-        //   <h3>Ingredients</h3>
-        //   <ul>
-        //     { Object.entries(dataDetails)
-        //       .filter((key) => key[0].includes('strIngredient'))
-        //       .map(([key, value], index) => {
-        //         if (value !== '' && value !== null) {
-        //           return (
-        //             <li
-        //               key={ value }
-        //               data-testid={ `${index}-ingredient-name-and-measure` }
-        //             >
-        //               { `${value} - ${dataDetails[`strMeasure${key.slice(NUMBER)}`]}` }
-        //             </li>
-        //           );
-        //         }
-        //         return null;
-        //       })}
-        //   </ul>
-        //   <h3>Instructions</h3>
-        //   <p data-testid="instructions">{ dataDetails.strInstructions }</p>
-        //   { dataDetails.strYoutube && (<iframe
-        //     data-testid="video"
-        //     title="video"
-        //     width="300"
-        //     height="200"
-        //     src={ dataDetails.strYoutube.replace('watch?v=', 'embed/') }
-        //   />)}
-        // </div>
         <CardDetail
           dataDetails={ dataDetails }
           route="meal"
@@ -82,36 +45,6 @@ function RecipeDetails() {
         />
       )}
       { pathname === `/drinks/${id}` && (
-        // <div>
-        //   <img
-        //     data-testid="recipe-photo"
-        //     src={ dataDetails.strDrinkThumb }
-        //     alt={ dataDetails.strDrink }
-        //     style={ styleImage }
-        //   />
-        //   <h1 data-testid="recipe-title">{ dataDetails.strDrink }</h1>
-        //   <h2 data-testid="recipe-category">{ dataDetails.strAlcoholic }</h2>
-        //   <h3>Ingredients</h3>
-        //   <ul>
-        //     { Object.entries(dataDetails)
-        //       .filter((key) => key[0].includes('strIngredient'))
-        //       .map(([key, value], index) => {
-        //         if (value !== '' && value !== null) {
-        //           return (
-        //             <li
-        //               key={ value }
-        //               data-testid={ `${index}-ingredient-name-and-measure` }
-        //             >
-        //               { `${value} - ${dataDetails[`strMeasure${key.slice(NUMBER)}`]}` }
-        //             </li>
-        //           );
-        //         }
-        //         return null;
-        //       })}
-        //   </ul>
-        //   <h3>Instructions</h3>
-        //   <p data-testid="instructions">{ dataDetails.strInstructions }</p>
-        // </div>
         <CardDetail
           dataDetails={ dataDetails }
           route="drink"
