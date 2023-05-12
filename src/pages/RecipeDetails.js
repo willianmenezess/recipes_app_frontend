@@ -5,6 +5,7 @@ import CardDetail from '../components/CardDetail';
 
 function RecipeDetails() {
   const [dataDetails, setDataDetails] = useState([{}]);
+  const [dataRecomendations, setDataRecomendations] = useState([]);
   const { id } = useParams();
   const { pathname } = useLocation();
 
@@ -13,26 +14,26 @@ function RecipeDetails() {
   const fetchDetails = useCallback(async () => {
     const URL_DETAILS_MEAL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
     const URL_DETAILS_DRINK = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+    const URL_RECOMENDATIONS_MEAL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+    const URL_RECOMENDATIONS_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+
+    const NUMBER_RECOMENDATIONS = 6;
     if (pathname === `/meals/${id}`) {
       const dataDetailss = await fetchData(URL_DETAILS_MEAL);
+      const dataRecomendationss = await fetchData(URL_RECOMENDATIONS_DRINK);
       setDataDetails(dataDetailss.meals[0]);
+      setDataRecomendations(dataRecomendationss.drinks.slice(0, NUMBER_RECOMENDATIONS));
     } else if (pathname === `/drinks/${id}`) {
       const dataDetailss = await fetchData(URL_DETAILS_DRINK);
+      const dataRecomendationss = await fetchData(URL_RECOMENDATIONS_MEAL);
       setDataDetails(dataDetailss.drinks[0]);
+      setDataRecomendations(dataRecomendationss.meals.slice(0, NUMBER_RECOMENDATIONS));
     }
   }, [fetchData, id, setDataDetails, pathname]);
 
   useEffect(() => {
     fetchDetails();
   }, [fetchDetails]);
-
-  // const NUMBER = 13;
-
-  // const styleImage = {
-  //   width: '250px',
-  //   height: '250px',
-  //   border: '1px solid black',
-  // };
 
   return (
     <section>
@@ -74,7 +75,11 @@ function RecipeDetails() {
         //     src={ dataDetails.strYoutube.replace('watch?v=', 'embed/') }
         //   />)}
         // </div>
-        <CardDetail dataDetails={ dataDetails } route="meal" />
+        <CardDetail
+          dataDetails={ dataDetails }
+          route="meal"
+          recomendations={ dataRecomendations }
+        />
       )}
       { pathname === `/drinks/${id}` && (
         // <div>
@@ -107,7 +112,11 @@ function RecipeDetails() {
         //   <h3>Instructions</h3>
         //   <p data-testid="instructions">{ dataDetails.strInstructions }</p>
         // </div>
-        <CardDetail dataDetails={ dataDetails } route="drink" />
+        <CardDetail
+          dataDetails={ dataDetails }
+          route="drink"
+          recomendations={ dataRecomendations }
+        />
       )}
 
     </section>
