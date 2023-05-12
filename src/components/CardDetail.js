@@ -1,14 +1,42 @@
-import React from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../css/CardDetail.css';
 
 function CardDetail({ dataDetails, route, recomendations }) {
+  const [doneRecipe, setDoneRecipe] = useState(false);
+  const [inProgressRecipe, setInProgressRecipe] = useState(false);
   const NUMBER = 13;
   const styleImage = {
     width: '250px',
     height: '250px',
     border: '1px solid black',
   };
+
+  const getDoneRecipe = useCallback(() => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes') || '[]');
+    if (doneRecipes.some((recipe) => recipe.id === dataDetails.idMeal)) {
+      setDoneRecipe(true);
+    }
+    if (doneRecipes.some((recipe) => recipe.id === dataDetails.idDrink)) {
+      setDoneRecipe(true);
+    }
+  }, [dataDetails.idDrink, dataDetails.idMeal]);
+
+  const getInProgressRecipe = useCallback(() => {
+    const inProgressRecipes = JSON
+      .parse(localStorage.getItem('inProgressRecipes') || '{}');
+    if (inProgressRecipes.meals && inProgressRecipes.meals[dataDetails.idMeal]) {
+      setInProgressRecipe(true);
+    }
+    if (inProgressRecipes.drinks && inProgressRecipes.drinks[dataDetails.idDrink]) {
+      setInProgressRecipe(true);
+    }
+  }, [dataDetails.idDrink, dataDetails.idMeal]);
+
+  useEffect(() => {
+    getDoneRecipe();
+    getInProgressRecipe();
+  }, [getDoneRecipe, getInProgressRecipe]);
 
   return (
     <>
@@ -109,31 +137,31 @@ function CardDetail({ dataDetails, route, recomendations }) {
         </div>
       </section>
       <footer>
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          className="btn-start"
-        >
-          Start Recipe
-        </button>
+        { !inProgressRecipe ? (
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            className="btn-start"
+            disabled={ doneRecipe }
+          >
+            Start Recipe
+          </button>)
+          : (
+            <button
+              type="button"
+              className="btn-start"
+              data-testid="start-recipe-btn"
+            >
+              Continue Recipe
+            </button>)}
       </footer>
     </>
   );
 }
 
 CardDetail.propTypes = {
-  // dataDetails: PropTypes.objectOf(PropTypes.string).isRequired,
+  dataDetails: PropTypes.objectOf(PropTypes.string).isRequired,
   route: PropTypes.string.isRequired,
-  dataDetails: PropTypes.shape({
-    strMealThumb: PropTypes.string,
-    strMeal: PropTypes.string,
-    strCategory: PropTypes.string,
-    strDrinkThumb: PropTypes.string,
-    strDrink: PropTypes.string,
-    strAlcoholic: PropTypes.string,
-    strInstructions: PropTypes.string,
-    strYoutube: PropTypes.string,
-  }).isRequired,
   recomendations: PropTypes.shape.isRequired,
 
 };
