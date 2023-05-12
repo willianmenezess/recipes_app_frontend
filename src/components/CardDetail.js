@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../css/CardDetail.css';
+import { useHistory } from 'react-router-dom';
 
 function CardDetail({ dataDetails, route, recomendations }) {
   const [doneRecipe, setDoneRecipe] = useState(false);
@@ -38,6 +39,16 @@ function CardDetail({ dataDetails, route, recomendations }) {
     getInProgressRecipe();
   }, [getDoneRecipe, getInProgressRecipe]);
 
+  const history = useHistory();
+
+  const handleStartRecipe = () => {
+    if (route === 'meal') {
+      history.push(`/meals/${dataDetails.idMeal}/in-progress`);
+    }
+    if (route === 'drink') {
+      history.push(`/drinks/${dataDetails.idDrink}/in-progress`);
+    }
+  };
   return (
     <>
       <section>
@@ -143,6 +154,7 @@ function CardDetail({ dataDetails, route, recomendations }) {
             data-testid="start-recipe-btn"
             className="btn-start"
             disabled={ doneRecipe }
+            onClick={ handleStartRecipe }
           >
             Start Recipe
           </button>)
