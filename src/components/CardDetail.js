@@ -8,8 +8,8 @@ function CardDetail({ dataDetails, route, recomendations }) {
   const [inProgressRecipe, setInProgressRecipe] = useState(false);
   const NUMBER = 13;
   const styleImage = {
-    width: '250px',
-    height: '250px',
+    width: '300px',
+    height: '300px',
     border: '1px solid black',
   };
 
@@ -61,6 +61,20 @@ function CardDetail({ dataDetails, route, recomendations }) {
                 data-testid="recipe-photo"
                 style={ styleImage }
               />
+              <div>
+                <button
+                  type="button"
+                  data-testid="share-btn"
+                >
+                  Share
+                </button>
+                <button
+                  type="button"
+                  data-testid="favorite-btn"
+                >
+                  Favorite
+                </button>
+              </div>
               <h1 data-testid="recipe-title">{ dataDetails.strMeal }</h1>
               <h2 data-testid="recipe-category">{ dataDetails.strCategory }</h2>
             </>
@@ -73,6 +87,20 @@ function CardDetail({ dataDetails, route, recomendations }) {
                 alt={ dataDetails.strDrink }
                 style={ styleImage }
               />
+              <div>
+                <button
+                  type="button"
+                  data-testid="share-btn"
+                >
+                  Share
+                </button>
+                <button
+                  type="button"
+                  data-testid="favorite-btn"
+                >
+                  Favorite
+                </button>
+              </div>
               <h1 data-testid="recipe-title">{ dataDetails.strDrink }</h1>
               <h2 data-testid="recipe-category">{ dataDetails.strAlcoholic }</h2>
             </>
