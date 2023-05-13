@@ -1,39 +1,57 @@
 // import PropTypes from 'prop-types';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom';
 import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom';
+import { AppContext } from '../contexts/AppProvider';
 import shareIconSvg from '../images/shareIcon.svg';
 import favIconSvg from '../images/whiteHeartIcon.svg';
-import { AppContext } from '../contexts/AppProvider';
 
 function CardRecipeInProgress() {
   const { fetchData } = useContext(AppContext);
   const [recipeData, setRecipeData] = useState([]);
-  //   const [ingredients, setIngredients] = useState([]);
   const { id } = useParams();
   const { pathname } = useLocation();
   const title = pathname === `/meals/${id}/in-progress` ? 'meals' : 'drinks';
   const mealsUrlId = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const drinksUrlId = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
 
-  console.log(id);
-  const ingredientsFilters = async () => {
-    const array = [];
-    const filteredIngredients = Object.values(recipeData).push(array);
-    console.log(filteredIngredients);
+  const handleChange = ({ target }) => {
+    if (target.checked) {
+      target.parentNode.style.textDecoration = 'line-through';
+    } else {
+      target.parentNode.style.textDecoration = 'none';
+    }
   };
+
+  const ingredients = Object.keys(recipeData).filter((item) => {
+    if (item.includes('strIngredient')) {
+      return recipeData[item];
+    }
+    return null;
+  }).map((item) => recipeData[item]);
+  // const measures = Object.keys(recipeData).filter((item) => {
+  //   if (item.includes('strMeasure')) {
+  //     return recipeData[item];
+  //   }
+  //   return null;
+  // }).map((item) => recipeData[item]);
+  // const filteredMeasures = measures.filter((item) => {
+  //   if (item !== null && item !== '' && item !== ' ' && item !== '0') {
+  //     return item;
+  //   }
+  //   return null;
+  // });
 
   const fetchId = useCallback(async () => {
     if (title === 'meals') {
       const dataMeals = await fetchData(mealsUrlId);
       setRecipeData(dataMeals.meals[0]);
-      ingredientsFilters();
-      console.log(dataMeals.meals[0]);
+      // console.log(dataMeals.meals[0]);
     }
     if (title === 'drinks') {
       const dataDrinks = await fetchData(drinksUrlId);
       setRecipeData(dataDrinks.drinks[0]);
-      console.log(dataDrinks.drinks[0]);
+      // console.log(dataDrinks.drinks[0]);
     }
   }, [title, mealsUrlId, drinksUrlId, fetchData]);
 
@@ -59,6 +77,22 @@ function CardRecipeInProgress() {
       </div>
       <div data-testid="instructions">
         { recipeData.strInstructions }
+      </div>
+      <h3>Ingredients</h3>
+      <div>
+        { ingredients.map((item, index) => (
+          <li key={ index }>
+            <label
+              data-testid={ `${index}-ingredient-step` }
+            >
+              <input
+                type="checkbox"
+                onChange={ handleChange }
+              />
+              { item }
+            </label>
+          </li>
+        )) }
       </div>
       <button data-testid="finish-recipe-btn">
         Finalizar Receita
