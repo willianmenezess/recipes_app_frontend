@@ -8,6 +8,10 @@ import favIconSvg from '../images/whiteHeartIcon.svg';
 
 function CardRecipeInProgress() {
   const { fetchData } = useContext(AppContext);
+  const [checkedItems, setCheckedItems] = useState(() => {
+    const storedItems = localStorage.getItem('inProgressRecipes');
+    return storedItems ? JSON.parse(storedItems) : [];
+  });
   const [recipeData, setRecipeData] = useState([]);
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -21,7 +25,10 @@ function CardRecipeInProgress() {
     } else {
       target.parentNode.style.textDecoration = 'none';
     }
+    const { name } = target;
+    setCheckedItems({ ...checkedItems, [name]: target.checked });
   };
+  console.log(checkedItems);
 
   const ingredients = Object.keys(recipeData).filter((item) => {
     if (item.includes('strIngredient')) {
@@ -29,35 +36,46 @@ function CardRecipeInProgress() {
     }
     return null;
   }).map((item) => recipeData[item]);
-  // const measures = Object.keys(recipeData).filter((item) => {
-  //   if (item.includes('strMeasure')) {
-  //     return recipeData[item];
-  //   }
-  //   return null;
-  // }).map((item) => recipeData[item]);
-  // const filteredMeasures = measures.filter((item) => {
-  //   if (item !== null && item !== '' && item !== ' ' && item !== '0') {
-  //     return item;
-  //   }
-  //   return null;
-  // });
+
+  const measures = Object.keys(recipeData).filter((item) => {
+    if (item.includes('strMeasure')) {
+      return recipeData[item];
+    }
+    return null;
+  }).map((item) => recipeData[item]);
+
+  const filteredMeasures = measures.filter((item) => {
+    if (item !== null && item !== '' && item !== ' ' && item !== '0') {
+      return item;
+    }
+    return null;
+  });
+
+  const ingredientsAndMeasures = ingredients.map((item, index) => {
+    if (filteredMeasures[index] !== undefined) {
+      return `${item} - ${filteredMeasures[index]}`;
+    }
+    return item;
+  });
 
   const fetchId = useCallback(async () => {
     if (title === 'meals') {
       const dataMeals = await fetchData(mealsUrlId);
       setRecipeData(dataMeals.meals[0]);
-      // console.log(dataMeals.meals[0]);
     }
     if (title === 'drinks') {
       const dataDrinks = await fetchData(drinksUrlId);
       setRecipeData(dataDrinks.drinks[0]);
-      // console.log(dataDrinks.drinks[0]);
     }
   }, [title, mealsUrlId, drinksUrlId, fetchData]);
 
   useEffect(() => {
     fetchId();
   }, [fetchId]);
+
+  useEffect(() => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(checkedItems));
+  }, [id, checkedItems]);
 
   return (
     <section>
@@ -79,19 +97,22 @@ function CardRecipeInProgress() {
         { recipeData.strInstructions }
       </div>
       <h3>Ingredients</h3>
+
       <div>
-        { ingredients.map((item, index) => (
-          <li key={ index }>
+        { ingredientsAndMeasures.map((item, index) => (
+          <p key={ index }>
             <label
               data-testid={ `${index}-ingredient-step` }
             >
               <input
                 type="checkbox"
+                name={ item }
+                checked={ !!checkedItems[item] }
                 onChange={ handleChange }
               />
-              { item }
+              { item}
             </label>
-          </li>
+          </p>
         )) }
       </div>
       <button data-testid="finish-recipe-btn">
