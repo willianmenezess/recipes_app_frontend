@@ -9,28 +9,59 @@ function SearchBar() {
   const history = useHistory();
   const { location } = history;
   const { setDataMeals, setDataDrinks } = useContext(AppContext);
-  // setDataMeals, setDataDrinks colocar no usememo do AppProvider
 
-  const handleArray = (data, id) => {
-    if (data === null) {
-      global.alert('Sorry, we haven\'t found any recipes for these filters.');
-    } else if (data.length === 1) {
-      history.push(`${location.pathname}/${data[0][id]}`);
-    } else if (location.pathname === '/meals') {
-      setDataMeals(data);
-    } else {
-      setDataDrinks(data);
-    }
+  // const handleArray = (data) => {
+  //   // if (data !== null && data.length > 1) {
+  //   //   if (location.pathname === '/meals') {
+  //   //     console.log('meals null');
+  //   //     setDataMeals(data);
+  //   //   } if (location.pathname === '/drinks') {
+  //   //     console.log('drinks null');
+  //   //     setDataDrinks(data);
+  //   //   }
+  //   // }
+  //   // if (data.length === 1 && data !== null) {
+  //   //   history.push(`${location.pathname}/${data[0][id]}`);
+  //   // }
+  //   if (data === null) {
+  //     // if (location.pathname === '/meals') {
+  //     //   console.log('meals null');
+  //     //   // setDataMeals([]);
+  //     //   return;
+  //     // } if (location.pathname === '/drinks') {
+  //     //   console.log('drinks null');
+  //     //   // setDataDrinks([]);
+  //     //   return;
+  //     // }
+  //   }
+  // };
+
+  const redirectionRoute = (data, id) => {
+    history.push(`${location.pathname}/${[id]}`);
   };
-
   const fetchApi = async () => {
     let data = {};
     if (location.pathname === '/meals') {
       data = await searchBarMeals(text, search);
-      handleArray(data.meals, 'idMeal');
-    } else {
+      if (data.meals === null) {
+        global.alert('Sorry, we haven\'t found any recipes for these filters.');
+        return;
+      }
+      if (data.meals.length === 1 && data.meals !== null) {
+        redirectionRoute(data.meals, data.meals[0].idMeal);
+      }
+      setDataMeals(data.meals);
+    } if (location.pathname === '/drinks') {
       data = await searchBarDrinks(text, search);
-      handleArray(data.drinks, 'idDrink');
+      if (data.drinks === null) {
+        global.alert('Sorry, we haven\'t found any recipes for these filters.');
+        // handleArray(data.drinks, 'idDrink');
+        return;
+      }
+      if (data.drinks.length === 1 && data.drinks !== null) {
+        redirectionRoute(data.drinks, data.drinks[0].idDrink);
+      }
+      setDataDrinks(data.drinks);
     }
   };
 
