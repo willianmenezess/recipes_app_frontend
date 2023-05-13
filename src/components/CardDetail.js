@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../css/CardDetail.css';
 import { useHistory } from 'react-router-dom';
+import ShareFavRecipeBtn from './ShareFavRecipeBtn';
 
 function CardDetail({ dataDetails, route, recomendations }) {
   const [doneRecipe, setDoneRecipe] = useState(false);
@@ -61,20 +62,7 @@ function CardDetail({ dataDetails, route, recomendations }) {
                 data-testid="recipe-photo"
                 style={ styleImage }
               />
-              <div>
-                <button
-                  type="button"
-                  data-testid="share-btn"
-                >
-                  Share
-                </button>
-                <button
-                  type="button"
-                  data-testid="favorite-btn"
-                >
-                  Favorite
-                </button>
-              </div>
+              <ShareFavRecipeBtn recipeDetails={ dataDetails } route={ route } />
               <h1 data-testid="recipe-title">{ dataDetails.strMeal }</h1>
               <h2 data-testid="recipe-category">{ dataDetails.strCategory }</h2>
             </>
@@ -87,20 +75,7 @@ function CardDetail({ dataDetails, route, recomendations }) {
                 alt={ dataDetails.strDrink }
                 style={ styleImage }
               />
-              <div>
-                <button
-                  type="button"
-                  data-testid="share-btn"
-                >
-                  Share
-                </button>
-                <button
-                  type="button"
-                  data-testid="favorite-btn"
-                >
-                  Favorite
-                </button>
-              </div>
+              <ShareFavRecipeBtn recipeDetails={ dataDetails } route={ route } />
               <h1 data-testid="recipe-title">{ dataDetails.strDrink }</h1>
               <h2 data-testid="recipe-category">{ dataDetails.strAlcoholic }</h2>
             </>
