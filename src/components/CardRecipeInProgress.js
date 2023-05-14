@@ -1,10 +1,11 @@
-// import PropTypes from 'prop-types';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { AppContext } from '../contexts/AppProvider';
+import blackFavIcon from '../images/blackHeartIcon.svg';
 import shareIconSvg from '../images/shareIcon.svg';
-import favIconSvg from '../images/whiteHeartIcon.svg';
+import whiteFavIcon from '../images/whiteHeartIcon.svg';
 
 function CardRecipeInProgress() {
   const { fetchData } = useContext(AppContext);
@@ -12,6 +13,10 @@ function CardRecipeInProgress() {
     const storedItems = localStorage.getItem('inProgressRecipes');
     return storedItems ? JSON.parse(storedItems) : [];
   });
+  const history = useHistory();
+  const [copied, setCopied] = useState();
+  const [isFavorite, setIsFavorite] = useState();
+  const [isFinishDisabled, setIsFinishDisabled] = useState(true);
   const [recipeData, setRecipeData] = useState([]);
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -28,7 +33,45 @@ function CardRecipeInProgress() {
     const { name } = target;
     setCheckedItems({ ...checkedItems, [name]: target.checked });
   };
-  console.log(checkedItems);
+
+  const handleShare = () => {
+    const { protocol, host } = window.location;
+    const type = title === 'meals' ? 'meals' : 'drinks';
+    const url = `${protocol}//${host}/${type}/${id}`;
+    navigator.clipboard.writeText(url);
+    setCopied(true);
+  };
+  const handleFavorite = () => {
+    const getLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const recipeLS = {
+      id,
+      type: title === 'meals' ? 'meal' : 'drink',
+      nationality: recipeData.strArea ? recipeData.strArea : '',
+      category: recipeData.strCategory,
+      alcoholicOrNot: recipeData.strAlcoholic ? recipeData.strAlcoholic : '',
+      name: recipeData.strMeal ? recipeData.strMeal : recipeData.strDrink,
+      image: recipeData.strMealThumb ? recipeData.strMealThumb : recipeData.strDrinkThumb,
+    };
+    localStorage.setItem(
+      'favoriteRecipes',
+      JSON.stringify([...getLocalStorage, recipeLS]),
+    );
+    setIsFavorite(true);
+  };
+
+  const handleUnfavorite = () => {
+    const getLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const filteredRecipes = getLocalStorage.findIndex((item) => item.id === id);
+    getLocalStorage.splice(filteredRecipes, 1);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(getLocalStorage));
+    setIsFavorite(false);
+  };
+
+  const checkIsFavorite = () => {
+    const getLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const isFavoriteRecipe = getLocalStorage.some((item) => item.id === id);
+    setIsFavorite(isFavoriteRecipe);
+  };
 
   const ingredients = Object.keys(recipeData).filter((item) => {
     if (item.includes('strIngredient')) {
@@ -69,12 +112,50 @@ function CardRecipeInProgress() {
     }
   }, [title, mealsUrlId, drinksUrlId, fetchData]);
 
+  const handleFinishButton = () => {
+    const verifyCheckedItems = Object.values(checkedItems)
+      .every((checked) => checked);
+    const nCheckedItems = Object.values(checkedItems).length;
+    const nIngredients = ingredientsAndMeasures.filter((item) => item !== null).length;
+    setIsFinishDisabled(!(verifyCheckedItems && nIngredients === nCheckedItems));
+  };
+
+  const handleFinishRecipe = () => {
+    const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const recipeLS = {
+      id,
+      nationality: recipeData.strArea ? recipeData.strArea : '',
+      name: recipeData.strMeal ? recipeData.strMeal : recipeData.strDrink,
+      category: recipeData.strCategory ? recipeData.strCategory : '',
+      image: recipeData.strMealThumb ? recipeData.strMealThumb : recipeData.strDrinkThumb,
+      tags: recipeData.strTags ? recipeData.strTags.split(',') : [],
+      alcoholicOrNot: recipeData.strAlcoholic ? recipeData.strAlcoholic : '',
+      type: title === 'meals' ? 'meal' : 'drink',
+      doneDate: recipeData.dateModified ? recipeData.dateModified : new Date(),
+    };
+    localStorage.setItem(
+      'doneRecipes',
+      JSON.stringify([...getDoneRecipes, recipeLS]),
+    );
+    history.push('/done-recipes');
+  };
+
   useEffect(() => {
     fetchId();
   }, [fetchId]);
 
   useEffect(() => {
     localStorage.setItem('inProgressRecipes', JSON.stringify(checkedItems));
+    const getLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (!getLocalStorage) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    }
+    const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (!getDoneRecipes) {
+      localStorage.setItem('doneRecipes', JSON.stringify([]));
+    }
+    checkIsFavorite();
+    handleFinishButton();
   }, [id, checkedItems]);
 
   return (
@@ -100,12 +181,15 @@ function CardRecipeInProgress() {
 
       <div>
         { ingredientsAndMeasures.map((item, index) => (
-          <p key={ index }>
+          <p
+            key={ index }
+          >
             <label
               data-testid={ `${index}-ingredient-step` }
             >
               <input
                 type="checkbox"
+                className="checkbox"
                 name={ item }
                 checked={ !!checkedItems[item] }
                 onChange={ handleChange }
@@ -115,27 +199,32 @@ function CardRecipeInProgress() {
           </p>
         )) }
       </div>
-      <button data-testid="finish-recipe-btn">
+      <button
+        data-testid="finish-recipe-btn"
+        disabled={ isFinishDisabled }
+        onClick={ handleFinishRecipe }
+      >
         Finalizar Receita
       </button>
       <br />
-      <button data-testid="share-btn">
+      { copied && <p>Link copied!</p> }
+      <button
+        data-testid="share-btn"
+        onClick={ handleShare }
+      >
         <img src={ shareIconSvg } alt="share" />
       </button>
-      <button data-testid="favorite-btn">
-        <img src={ favIconSvg } alt="fav" />
+      <button
+        data-testid="favorite-btn"
+        onClick={ isFavorite ? handleUnfavorite : handleFavorite }
+        src={ isFavorite ? blackFavIcon : whiteFavIcon }
+      >
+        { isFavorite
+          ? <img src={ blackFavIcon } alt="favorite" />
+          : <img src={ whiteFavIcon } alt="favorite" />}
       </button>
     </section>
   );
 }
-// CardRecipeInProgress.propTypes = {
-//   recipe: PropTypes.shape({
-//     strDrinkThumb: PropTypes.string,
-//     strMealThumb: PropTypes.string,
-//     strDrink: PropTypes.string,
-//     strMeal: PropTypes.string,
-//     strCategory: PropTypes.string,
-//   }).isRequired,
-// };
 
 export default CardRecipeInProgress;
