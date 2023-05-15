@@ -38,7 +38,6 @@ function Login() {
       <div className="logo-recipes"><img src={ logoApp } alt="logo" /></div>
       <form>
         <label htmlFor="email">
-          Email
           <input
             type="email"
             id="email"
@@ -46,13 +45,11 @@ function Login() {
             name="inputEmail"
             value={ login.inputEmail }
             onChange={ handleChange }
-            className="email-input"
             placeholder="Email"
+            className="email-input"
           />
         </label>
-        <br />
         <label htmlFor="password">
-          Senha
           <input
             type="password"
             id="password"
@@ -60,9 +57,10 @@ function Login() {
             name="inputPassword"
             value={ login.inputPassword }
             onChange={ handleChange }
+            placeholder="password"
+            className="pass-input"
           />
         </label>
-        <br />
         <button
           type="submit"
           data-testid="login-submit-btn"
