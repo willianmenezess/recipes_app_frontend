@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import '../css/CardDetail.css';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import ShareFavRecipeBtn from './ShareFavRecipeBtn';
 
 function CardDetail({ dataDetails, route, recomendations }) {
@@ -41,13 +41,14 @@ function CardDetail({ dataDetails, route, recomendations }) {
   }, [getDoneRecipe, getInProgressRecipe]);
 
   const history = useHistory();
+  const { id } = useParams();
 
   const handleStartRecipe = () => {
     if (route === 'meal') {
-      history.push(`/meals/${dataDetails.idMeal}/in-progress`);
+      history.push(`/meals/${id}/in-progress`);
     }
     if (route === 'drink') {
-      history.push(`/drinks/${dataDetails.idDrink}/in-progress`);
+      history.push(`/drinks/${id}/in-progress`);
     }
   };
   return (
