@@ -15,7 +15,7 @@ function Recipes() {
 
   useEffect(() => {
     allFetchsRecipes(pathname);
-  }, [allFetchsRecipes]);
+  }, [allFetchsRecipes, pathname]);
 
   const NUMBER_MAX = 12;
   const NUMBER_MAX_CATEGORIES = 5;
