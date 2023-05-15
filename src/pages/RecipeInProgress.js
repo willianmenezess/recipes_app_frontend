@@ -1,8 +1,12 @@
 import React from 'react';
+import CardRecipeInProgress from '../components/CardRecipeInProgress';
 
 function RecipeInProgress() {
   return (
-    <div>RecipeInProgress</div>
+    <>
+      <div>RecipeInProgress</div>
+      <CardRecipeInProgress />
+    </>
   );
 }
 
