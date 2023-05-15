@@ -1,16 +1,11 @@
-import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Profile() {
-  const email = 'email@mail.com';
+  const email = JSON.parse(localStorage.getItem('user'));
+  console.log(email);
   const history = useHistory();
-
-  const saveLocal = () => {
-    localStorage.setItem('email', email);
-  };
-  useEffect(() => { saveLocal(); }, []);
 
   const gotoDone = () => {
     history.push('/done-recipes');
@@ -29,7 +24,7 @@ function Profile() {
       <div>Profile</div>
       <Header title="Profile" searchIconToggle={ false } />
       <body>
-        <p data-testid="profile-email">{ email }</p>
+        <p data-testid="profile-email">{ email.email }</p>
         <button
           data-testid="profile-done-btn"
           onClick={ gotoDone }
