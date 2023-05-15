@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
-// import SearchBar from './SearchBar';
 
 function Header({ title, searchIconToggle }) {
   const history = useHistory();
