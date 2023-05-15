@@ -1,0 +1,31 @@
+footer {
+  position: fixed;
+}
+
+.btn-start {
+  background-color: red;
+  border-radius: 10px;
+  bottom: 0;
+  color: white;
+  font-size: 20px;
+  height: 50px;
+  position: fixed;
+  right: 0;
+  width: 100%;
+}
+
+.carousel {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-bottom: 50px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.image-recomendation {
+  height: 175px;
+  object-fit: cover;
+  scroll-snap-align: start;
+  width: 175px;
+}
