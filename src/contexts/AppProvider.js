@@ -20,17 +20,22 @@ function AppProvider({ children }) {
 
   const { fetchData, error, isLoading } = useFetch();
 
-  const allFetchsRecipes = useCallback(async () => {
-    const fetchDataMeals = await fetchData(URL_MEALS);
-    const fetchDataDrinks = await fetchData(URL_DRINKS);
-    setDataMeals(fetchDataMeals.meals);
-    setInitialDataMeals(fetchDataMeals.meals);
-    setDataDrinks(fetchDataDrinks.drinks);
-    setInitialDataDrinks(fetchDataDrinks.drinks);
-    const categMeals = await fetchData(CATEGORIES_MEALS);
-    setCategoriesMeals(categMeals.meals);
-    const categDrinks = await fetchData(CATEGORIES_DRINKS);
-    setCategoriesDrinks(categDrinks.drinks);
+  const allFetchsRecipes = useCallback(async (page) => {
+    let dataRecipes = {};
+    let dataCategories = {};
+    if (page.includes('meals')) {
+      dataRecipes = await fetchData(URL_MEALS);
+      dataCategories = await fetchData(CATEGORIES_MEALS);
+      setCategoriesMeals(dataCategories?.meals);
+      setDataMeals(dataRecipes.meals || []);
+      setInitialDataMeals(dataRecipes.meals || []);
+    } else {
+      dataRecipes = await fetchData(URL_DRINKS);
+      dataCategories = await fetchData(CATEGORIES_DRINKS);
+      setCategoriesDrinks(dataCategories?.drinks);
+      setDataDrinks(dataRecipes.drinks || []);
+      setInitialDataDrinks(dataRecipes.drinks || []);
+    }
   }, [fetchData]);
 
   const filterAllCategories = useCallback(async () => {
@@ -65,9 +70,13 @@ function AppProvider({ children }) {
     fetchData,
     wasClicked,
     setWasClicked,
+    setDataMeals,
+    setDataDrinks,
   }), [dataMeals, dataDrinks, error, isLoading,
     categoriesMeals, categoriesDrinks, allFetchsRecipes, filterByCategory,
-    initialDataMeals, initialDataDrinks, filterAllCategories, fetchData, wasClicked]);
+    initialDataMeals, initialDataDrinks, filterAllCategories, fetchData, wasClicked,
+    setDataMeals, setDataDrinks,
+  ]);
 
   return (
     <AppContext.Provider value={ values }>
