@@ -1,30 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
 import imageShare from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function ShareFavRecipeBtn({ recipeDetails, route }) {
-  console.log(recipeDetails);
-  console.log(route);
   const [messageShare, setMessageShare] = useState('');
+  const [isFavorite, setIsFavorite] = useState(false);
+  //   const [isFavorite, setIsFavorite] = useState((JSON.parse(localStorage
+  //     .getItem('favoriteRecipes')) || [])
+  //     .some((recipe) => recipe.id === recipeDetails.idMeal || recipe.id
+  // === recipeDetails.idDrink));
   const { pathname } = useLocation();
 
-  const handleShareClick = async () => {
+  // const copyClipboardApi = async (text) => {
+  //   if (!navigator.clipboard) {
+  //     throw makeError();
+  //   }
+  //   return navigator.clipboard.writeText(text);
+  // };
+
+  const handleShareClick = () => {
     const URL = `http://localhost:3000${pathname}`;
-    setMessageShare('Link Copied!');
-    await copy(URL);
+    setMessageShare('Link copied!');
+    copy(URL);
   };
+
+  const initialFavorite = useCallback(() => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    const initialFavoriteRecipe = favoriteRecipes
+      .some((recipe) => recipe.id === recipeDetails.idMeal || recipe.id
+    === recipeDetails.idDrink);
+    setIsFavorite(initialFavoriteRecipe);
+  }, [recipeDetails.idDrink, recipeDetails.idMeal]);
+
+  useEffect(() => {
+    initialFavorite();
+  }, [initialFavorite]);
 
   const handleFavoriteClick = () => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-    if (route === 'meal') {
-      const {
-        idMeal,
-        strArea,
-        strCategory,
-        strMeal,
-        strMealThumb,
-      } = recipeDetails;
+    const isFavoriteRecipe = favoriteRecipes
+      .some((recipe) => recipe.id === recipeDetails.idMeal || recipe.id
+    === recipeDetails.idDrink);
+    if (route === 'meal' && !isFavoriteRecipe) {
+      const { idMeal, strArea, strCategory, strMeal, strMealThumb } = recipeDetails;
       const newFavoriteRecipe = {
         id: idMeal,
         type: route,
@@ -36,15 +58,11 @@ function ShareFavRecipeBtn({ recipeDetails, route }) {
       };
       localStorage.setItem('favoriteRecipes', JSON
         .stringify([...favoriteRecipes, newFavoriteRecipe]));
+      setIsFavorite(true);
     }
-    if (route === 'drink') {
-      const {
-        idDrink,
-        strAlcoholic,
-        strCategory,
-        strDrink,
-        strDrinkThumb,
-      } = recipeDetails;
+    if (route === 'drink' && !isFavoriteRecipe) {
+      const { idDrink, strAlcoholic, strCategory, strDrink,
+        strDrinkThumb } = recipeDetails;
       const newFavoriteRecipe = {
         id: idDrink,
         type: route,
@@ -56,6 +74,15 @@ function ShareFavRecipeBtn({ recipeDetails, route }) {
       };
       localStorage.setItem('favoriteRecipes', JSON
         .stringify([...favoriteRecipes, newFavoriteRecipe]));
+      setIsFavorite(true);
+    }
+    if (isFavoriteRecipe) {
+      const newFavoriteRecipes = favoriteRecipes
+        .filter((recipe) => recipe.id !== recipeDetails.idMeal
+      && recipe.id !== recipeDetails.idDrink);
+      localStorage.setItem('favoriteRecipes', JSON
+        .stringify(newFavoriteRecipes));
+      setIsFavorite(false);
     }
   };
 
@@ -71,10 +98,19 @@ function ShareFavRecipeBtn({ recipeDetails, route }) {
       </button>
       <button
         type="button"
-        data-testid="favorite-btn"
+        // data-testid="favorite-btn"
         onClick={ handleFavoriteClick }
       >
-        Favorite
+        {isFavorite && <img
+          data-testid="favorite-btn"
+          src={ blackHeartIcon }
+          alt="favorite"
+        />}
+        {!isFavorite && <img
+          data-testid="favorite-btn"
+          src={ whiteHeartIcon }
+          alt="favorite"
+        />}
       </button>
     </div>
   );

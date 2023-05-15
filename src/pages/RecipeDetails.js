@@ -23,7 +23,8 @@ function RecipeDetails() {
       const dataRecomendationss = await fetchData(URL_RECOMENDATIONS_DRINK);
       setDataDetails(dataDetailss.meals[0]);
       setDataRecomendations(dataRecomendationss.drinks.slice(0, NUMBER_RECOMENDATIONS));
-    } else if (pathname === `/drinks/${id}`) {
+    }
+    if (pathname === `/drinks/${id}`) {
       const dataDetailss = await fetchData(URL_DETAILS_DRINK);
       const dataRecomendationss = await fetchData(URL_RECOMENDATIONS_MEAL);
       setDataDetails(dataDetailss.drinks[0]);
@@ -34,6 +35,8 @@ function RecipeDetails() {
   useEffect(() => {
     fetchDetails();
   }, [fetchDetails]);
+
+  console.log(dataDetails);
 
   return (
     <section>

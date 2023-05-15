@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import logoApp from '../images/logo Recipes App.svg';
+import '../css/Login.css';
 
 function Login() {
   const [login, setLogin] = useState({ inputEmail: '', inputPassword: '' });
@@ -31,7 +33,9 @@ function Login() {
   };
 
   return (
-    <section>
+    <section className="login">
+      <div className="background-login" />
+      <div className="logo-recipes"><img src={ logoApp } alt="logo" /></div>
       <form>
         <label htmlFor="email">
           Email
@@ -42,6 +46,8 @@ function Login() {
             name="inputEmail"
             value={ login.inputEmail }
             onChange={ handleChange }
+            className="email-input"
+            placeholder="Email"
           />
         </label>
         <br />
