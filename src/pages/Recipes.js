@@ -14,7 +14,7 @@ function Recipes() {
   const title = pathname === '/meals' ? 'Meals' : 'Drinks';
 
   useEffect(() => {
-    allFetchsRecipes();
+    allFetchsRecipes(pathname);
   }, [allFetchsRecipes]);
 
   const NUMBER_MAX = 12;

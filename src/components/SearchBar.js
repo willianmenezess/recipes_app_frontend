@@ -10,32 +10,6 @@ function SearchBar() {
   const { location } = history;
   const { setDataMeals, setDataDrinks } = useContext(AppContext);
 
-  // const handleArray = (data) => {
-  //   // if (data !== null && data.length > 1) {
-  //   //   if (location.pathname === '/meals') {
-  //   //     console.log('meals null');
-  //   //     setDataMeals(data);
-  //   //   } if (location.pathname === '/drinks') {
-  //   //     console.log('drinks null');
-  //   //     setDataDrinks(data);
-  //   //   }
-  //   // }
-  //   // if (data.length === 1 && data !== null) {
-  //   //   history.push(`${location.pathname}/${data[0][id]}`);
-  //   // }
-  //   if (data === null) {
-  //     // if (location.pathname === '/meals') {
-  //     //   console.log('meals null');
-  //     //   // setDataMeals([]);
-  //     //   return;
-  //     // } if (location.pathname === '/drinks') {
-  //     //   console.log('drinks null');
-  //     //   // setDataDrinks([]);
-  //     //   return;
-  //     // }
-  //   }
-  // };
-
   const redirectionRoute = (data, id) => {
     history.push(`${location.pathname}/${[id]}`);
   };

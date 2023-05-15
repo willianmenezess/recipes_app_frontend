@@ -15,6 +15,7 @@ function Header({ title, searchIconToggle }) {
         { title }
       </h1>
       <button
+        src={ profileIcon }
         data-testid="profile-top-btn"
         onClick={ redirect }
       >
@@ -22,6 +23,7 @@ function Header({ title, searchIconToggle }) {
       </button>
       { searchIconToggle && (
         <button
+          src={ searchIcon }
           data-testid="search-top-btn"
           onClick={ () => setToggleSearchBar(!toggleSearchBar) }
         >
