@@ -1,27 +1,56 @@
-import React from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useParams, useHistory } from 'react-router-dom';
+import '../css/CardDetail.css';
+import { useHistory, useParams } from 'react-router-dom';
+import ShareFavRecipeBtn from './ShareFavRecipeBtn';
 
-// import '../css/CardDetail.css';
 function CardDetail({ dataDetails, route, recomendations }) {
+  const [doneRecipe, setDoneRecipe] = useState(false);
+  const [inProgressRecipe, setInProgressRecipe] = useState(false);
   const NUMBER = 13;
   const styleImage = {
-    width: '250px',
-    height: '250px',
+    width: '300px',
+    height: '300px',
     border: '1px solid black',
   };
+
+  const getDoneRecipe = useCallback(() => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes') || '[]');
+    if (doneRecipes.some((recipe) => recipe.id === dataDetails.idMeal)) {
+      setDoneRecipe(true);
+    }
+    if (doneRecipes.some((recipe) => recipe.id === dataDetails.idDrink)) {
+      setDoneRecipe(true);
+    }
+  }, [dataDetails.idDrink, dataDetails.idMeal]);
+
+  const getInProgressRecipe = useCallback(() => {
+    const inProgressRecipes = JSON
+      .parse(localStorage.getItem('inProgressRecipes') || '{}');
+    if (inProgressRecipes.meals && inProgressRecipes.meals[dataDetails.idMeal]) {
+      setInProgressRecipe(true);
+    }
+    if (inProgressRecipes.drinks && inProgressRecipes.drinks[dataDetails.idDrink]) {
+      setInProgressRecipe(true);
+    }
+  }, [dataDetails.idDrink, dataDetails.idMeal]);
+
+  useEffect(() => {
+    getDoneRecipe();
+    getInProgressRecipe();
+  }, [getDoneRecipe, getInProgressRecipe]);
+
   const history = useHistory();
   const { id } = useParams();
-  const handleClickMealDrink = () => {
-    if (route === 'drink') {
-      console.log('drink');
-      history.push(`/drinks/${id}/in-progress`);
-    }
+
+  const handleStartRecipe = () => {
     if (route === 'meal') {
       history.push(`/meals/${id}/in-progress`);
     }
+    if (route === 'drink') {
+      history.push(`/drinks/${id}/in-progress`);
+    }
   };
-
   return (
     <>
       <section>
@@ -34,6 +63,7 @@ function CardDetail({ dataDetails, route, recomendations }) {
                 data-testid="recipe-photo"
                 style={ styleImage }
               />
+              <ShareFavRecipeBtn recipeDetails={ dataDetails } route={ route } />
               <h1 data-testid="recipe-title">{ dataDetails.strMeal }</h1>
               <h2 data-testid="recipe-category">{ dataDetails.strCategory }</h2>
             </>
@@ -46,6 +76,7 @@ function CardDetail({ dataDetails, route, recomendations }) {
                 alt={ dataDetails.strDrink }
                 style={ styleImage }
               />
+              <ShareFavRecipeBtn recipeDetails={ dataDetails } route={ route } />
               <h1 data-testid="recipe-title">{ dataDetails.strDrink }</h1>
               <h2 data-testid="recipe-category">{ dataDetails.strAlcoholic }</h2>
             </>
@@ -79,7 +110,9 @@ function CardDetail({ dataDetails, route, recomendations }) {
           />)}
         </div>
         <div>
+
           <h3>Recomendations</h3>
+
           <div className="carousel">
             { route === 'drink' && (
               recomendations.map((recipe, index) => (
@@ -117,31 +150,34 @@ function CardDetail({ dataDetails, route, recomendations }) {
         </div>
       </section>
       <footer>
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          className="btn-start"
-          onClick={ () => handleClickMealDrink() }
-        >
-          Start Recipe
-        </button>
+        { !inProgressRecipe ? (
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            className="btn-start"
+            disabled={ doneRecipe }
+            onClick={ handleStartRecipe }
+          >
+            Start Recipe
+          </button>)
+          : (
+            <button
+              type="button"
+              className="btn-start"
+              data-testid="start-recipe-btn"
+            >
+              Continue Recipe
+            </button>)}
       </footer>
     </>
   );
 }
+
 CardDetail.propTypes = {
-//   dataDetails: PropTypes.objectOf(PropTypes.string).isRequired,
+  dataDetails: PropTypes.objectOf(PropTypes.string).isRequired,
   route: PropTypes.string.isRequired,
-  dataDetails: PropTypes.shape({
-    strMealThumb: PropTypes.string,
-    strMeal: PropTypes.string,
-    strCategory: PropTypes.string,
-    strDrinkThumb: PropTypes.string,
-    strDrink: PropTypes.string,
-    strAlcoholic: PropTypes.string,
-    strInstructions: PropTypes.string,
-    strYoutube: PropTypes.string,
-  }).isRequired,
   recomendations: PropTypes.shape.isRequired,
+
 };
+
 export default CardDetail;

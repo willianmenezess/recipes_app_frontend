@@ -8,7 +8,9 @@ function RecipeDetails() {
   const [dataRecomendations, setDataRecomendations] = useState([]);
   const { id } = useParams();
   const { pathname } = useLocation();
+
   const { fetchData } = useContext(AppContext);
+
   const fetchDetails = useCallback(async () => {
     const URL_DETAILS_MEAL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
     const URL_DETAILS_DRINK = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -20,16 +22,21 @@ function RecipeDetails() {
       const dataRecomendationss = await fetchData(URL_RECOMENDATIONS_DRINK);
       setDataDetails(dataDetailss.meals[0]);
       setDataRecomendations(dataRecomendationss.drinks.slice(0, NUMBER_RECOMENDATIONS));
-    } else if (pathname === `/drinks/${id}`) {
+    }
+    if (pathname === `/drinks/${id}`) {
       const dataDetailss = await fetchData(URL_DETAILS_DRINK);
       const dataRecomendationss = await fetchData(URL_RECOMENDATIONS_MEAL);
       setDataDetails(dataDetailss.drinks[0]);
       setDataRecomendations(dataRecomendationss.meals.slice(0, NUMBER_RECOMENDATIONS));
     }
   }, [fetchData, id, setDataDetails, pathname]);
+
   useEffect(() => {
     fetchDetails();
   }, [fetchDetails]);
+
+  console.log(dataDetails);
+
   return (
     <section>
       { pathname === `/meals/${id}` && (

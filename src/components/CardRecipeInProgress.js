@@ -16,7 +16,7 @@ function CardRecipeInProgress() {
   const history = useHistory();
   const [copied, setCopied] = useState();
   const [isFavorite, setIsFavorite] = useState();
-  const [isFinishDisabled, setIsFinishDisabled] = useState(true);
+  const [isFinishDisabled, setIsFinishDisabled] = useState(false);
   const [recipeData, setRecipeData] = useState([]);
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -67,11 +67,11 @@ function CardRecipeInProgress() {
     setIsFavorite(false);
   };
 
-  const checkIsFavorite = () => {
+  const checkIsFavorite = useCallback(() => {
     const getLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const isFavoriteRecipe = getLocalStorage.some((item) => item.id === id);
     setIsFavorite(isFavoriteRecipe);
-  };
+  }, [id]);
 
   const ingredients = Object.keys(recipeData).filter((item) => {
     if (item.includes('strIngredient')) {
@@ -112,13 +112,13 @@ function CardRecipeInProgress() {
     }
   }, [title, mealsUrlId, drinksUrlId, fetchData]);
 
-  const handleFinishButton = () => {
+  const handleFinishButton = useCallback(() => {
     const verifyCheckedItems = Object.values(checkedItems)
       .every((checked) => checked);
     const nCheckedItems = Object.values(checkedItems).length;
     const nIngredients = ingredientsAndMeasures.filter((item) => item !== null).length;
     setIsFinishDisabled(!(verifyCheckedItems && nIngredients === nCheckedItems));
-  };
+  }, [checkedItems, ingredientsAndMeasures]);
 
   const handleFinishRecipe = () => {
     const getDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -156,7 +156,7 @@ function CardRecipeInProgress() {
     }
     checkIsFavorite();
     handleFinishButton();
-  }, [id, checkedItems]);
+  }, [checkedItems, checkIsFavorite, handleFinishButton]);
 
   return (
     <section>

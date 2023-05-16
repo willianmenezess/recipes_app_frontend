@@ -18,7 +18,14 @@ function useFetch() {
     }
   }, []);
 
+  // const fetchData = useCallback(async (url) => {
+  //   const data = await fetch(url);
+  //   const sucess = await data.json();
+  //   return sucess;
+  // }, []);
+
   return { fetchData, error, isLoading };
+  // return { fetchData };
 }
 
 useFetch.propTypes = {
