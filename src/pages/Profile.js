@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Profile() {
-  const email = JSON.parse(localStorage.getItem('user'));
+  const email = JSON.parse(localStorage.getItem('user')) || '';
   console.log(email);
   const history = useHistory();
 
@@ -21,7 +21,6 @@ function Profile() {
   };
   return (
     <>
-      <div>Profile</div>
       <Header title="Profile" searchIconToggle={ false } />
       <body>
         <p data-testid="profile-email">{ email.email }</p>
