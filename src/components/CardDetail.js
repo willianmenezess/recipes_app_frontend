@@ -66,7 +66,13 @@ function CardDetail({ dataDetails, route, recomendations }) {
                 { dataDetails.strMeal }
 
               </h1>
-              <h2 data-testid="recipe-category">{ dataDetails.strCategory }</h2>
+              <h2
+                data-testid="recipe-category"
+                className="title-category-recipe"
+              >
+                { dataDetails.strCategory }
+
+              </h2>
             </>
           )}
           { route === 'drink' && (
@@ -85,7 +91,13 @@ function CardDetail({ dataDetails, route, recomendations }) {
                 { dataDetails.strDrink }
 
               </h1>
-              <h2 data-testid="recipe-category">{ dataDetails.strAlcoholic }</h2>
+              <h2
+                data-testid="recipe-category"
+                className="title-category-recipe"
+              >
+                { dataDetails.strAlcoholic }
+
+              </h2>
             </>
           )}
           <h3>Ingredients</h3>
@@ -123,7 +135,11 @@ function CardDetail({ dataDetails, route, recomendations }) {
           <div className="carousel">
             { route === 'drink' && (
               recomendations.map((recipe, index) => (
-                <div key={ index } data-testid={ `${index}-recommendation-card` }>
+                <div
+                  key={ index }
+                  data-testid={ `${index}-recommendation-card` }
+                  className="card-recomendation"
+                >
                   <img
                     src={ recipe.strMealThumb }
                     alt={ recipe.strMeal }
@@ -140,7 +156,11 @@ function CardDetail({ dataDetails, route, recomendations }) {
             )}
             { route === 'meal' && (
               recomendations.map((recipe, index) => (
-                <div key={ index } data-testid={ `${index}-recommendation-card` }>
+                <div
+                  key={ index }
+                  data-testid={ `${index}-recommendation-card` }
+                  className="card-recomendation"
+                >
                   <img
                     src={ recipe.strDrinkThumb }
                     alt={ recipe.strDrink }

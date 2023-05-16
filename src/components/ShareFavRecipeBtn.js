@@ -90,7 +90,7 @@ function ShareFavRecipeBtn({ recipeDetails, route }) {
   return (
     <div>
       <span>{ messageShare }</span>
-      <div className="container-btns">
+      <div className="container-btns-share">
         <button
           type="button"
           data-testid="share-btn"
@@ -112,7 +112,6 @@ function ShareFavRecipeBtn({ recipeDetails, route }) {
             data-testid="favorite-btn"
             src={ whiteHeartIcon }
             alt="favorite"
-            className="btns"
           />}
         </button>
       </div>

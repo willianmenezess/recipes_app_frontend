@@ -38,22 +38,56 @@
     width: 100vw;
   }
 
-  .container-btns {
+  .container-btns-share {
     display: flex;
     justify-content: flex-end;
     position: absolute;
-    top: 83vw;
+    top: 87vw;
+    width: 100vw;
   }
 
   .title-recipe {
-    color: #41197f;
+    color: black;
     font-size: 25px;
     margin-top: 10px;
     padding-left: 10px;
     text-align: left;
   }
 
-  .btns {
-    background-color: #fcc436;
+  .title-category-recipe {
+    color: black;
+    font-family: fantasy;
+    font-size: 15px;
+    margin-top: 3px;
+    padding-left: 20px;
+    text-align: left;
+  }
+
+  ul li {
+    padding: 3px;
+  }
+
+  h3 {
+    font-size: 20px;
+    padding-left: 10px;
+  }
+
+  p {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: justify;
+  }
+
+  iframe {
+    width: 100vw;
+  }
+
+  .card-recomendation {
+    border-radius: 5px;
+    box-shadow: #41197f 0.01px 5px;
+  }
+
+  .card-recomendation p {
+    text-align: center;
   }
 }
