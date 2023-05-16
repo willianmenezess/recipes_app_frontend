@@ -1,0 +1,41 @@
+
+
+
+footer {
+   justify-content: end;
+    align-items: center;
+    bottom: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 10px;
+    position: fixed;
+    transition: all 500ms;
+    width: 100%;
+    position: absolute;
+    width: 360px;
+    height: 52px;
+    left: 0px;
+    /* top: 754px; */
+    background: #fcc436;
+    box-shadow: 0px -3px 10px rgb(249, 245, 245);
+  }
+
+
+.icon {
+    background-color: transparent;
+    border: 0 none;
+    border-radius: 35px;
+    color: rgb(249, 245, 245);
+    cursor: pointer;
+    font-size: 2px;
+    margin: 10px;
+    margin-right:;
+    left: 10%;
+    right: 83.16%;
+    top: 95.71%;
+    bottom: 1.15%;
+    background: #fcc436;
+    border: 1px solid #3b023b;
+  }

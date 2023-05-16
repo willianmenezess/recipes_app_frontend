@@ -3,10 +3,7 @@ import CardRecipeInProgress from '../components/CardRecipeInProgress';
 
 function RecipeInProgress() {
   return (
-    <>
-      <div>RecipeInProgress</div>
-      <CardRecipeInProgress />
-    </>
+    <CardRecipeInProgress />
   );
 }
 

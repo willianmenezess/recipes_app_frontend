@@ -1,0 +1,91 @@
+@media ( max-width : 480px ) {
+
+
+    .imag {
+    width: 362.01px;
+    height: 200px;
+    left: -1px;
+    top: 0px;
+    }
+
+    .title {
+        position: absolute;
+        width: 147px;
+        height: 42px;
+        left: 110.01px;
+        top: 150px;
+
+        font-family: 'Epilogue';
+        font-style: normal;
+        font-weight: 900;
+        font-size: 25px;
+        line-height: 20px;
+        text-align: center;
+        letter-spacing: 0.105em;
+        text-transform: uppercase;
+
+        color: #FFFFFF;
+    }
+
+    h3 {
+        font-family: 'Epilogue';
+        font-style: Bold;
+        font-size: 20px;
+        line-height: 21px;
+        line-height: 100%;
+        align-items: end;
+        vertical-align: top;
+    }
+
+    .border {
+        border: 1px solid #888585;
+        border-width: 3px;
+    }
+
+    .checkbox {
+        color: rgb(235, 33, 11);
+    }
+
+    /* Estilizando o checkbox */
+input[type="checkbox"] {
+    appearance: none; /* Remove o estilo padrão do checkbox */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fcc436;
+    border-radius: 30px;
+    outline: none;
+    cursor: pointer;
+  }
+  
+  /* Estilizando o estado marcado (checked) do checkbox */
+  input[type="checkbox"]:checked::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: #41197f; /* Define a cor desejada */
+    border-radius: 30px;
+    margin: 1px;
+  }
+
+  input[type="checkbox"]:checked + label {
+    text-decoration-color: rgb(236, 236, 10); /* Define a cor desejada para a linha */  
+  }
+
+  .instruction {
+    border: 1px solid #888585;
+    border-width: 3px;
+  }
+
+  .paragraph {
+    font-family: 'Epilogue';
+    font-style: Bold;
+    font-size: 16px;
+    line-height: 16px;
+    line-height: 110.24%;
+    text-align: justify;
+    margin: 2%;
+  }
+}
