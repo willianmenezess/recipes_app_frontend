@@ -52,7 +52,6 @@ function Login() {
             className="email-input"
           />
         </label>
-        <br />
         <label htmlFor="password">
           <input
             type="password"
@@ -65,7 +64,6 @@ function Login() {
             className="pass-input"
           />
         </label>
-        <br />
         <button
           type="submit"
           data-testid="login-submit-btn"

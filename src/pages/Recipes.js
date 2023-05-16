@@ -6,6 +6,7 @@ import { AppContext } from '../contexts/AppProvider';
 import ButtonCategory from '../components/ButtonCategory';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import '../css/Recipes.css';
 
 function Recipes() {
   const { pathname } = useLocation();
@@ -24,18 +25,12 @@ function Recipes() {
   const categoriesMeals5 = categoriesMeals.slice(0, NUMBER_MAX_CATEGORIES);
   const categoriesDrinks5 = categoriesDrinks.slice(0, NUMBER_MAX_CATEGORIES);
 
-  const styleContainer = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    gap: '10px',
-  };
-
   return (
     <section>
       <Header title={ title } searchIconToggle />
-      <section>
+      <section className="container-btns">
         <button
+          className="btn-category"
           type="button"
           data-testid="All-category-filter"
           onClick={ filterAllCategories }
@@ -61,7 +56,7 @@ function Recipes() {
         )}
       </section>
 
-      <section style={ styleContainer }>
+      <section className="recipes-container">
         {isLoading && <div>Loading...</div>}
         {!isLoading && (
           pathname === '/meals' && dataMeals12.map((meal, index) => (
