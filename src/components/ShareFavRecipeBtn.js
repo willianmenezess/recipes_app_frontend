@@ -5,6 +5,7 @@ import copy from 'clipboard-copy';
 import imageShare from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../css/CardDetail.css';
 
 function ShareFavRecipeBtn({ recipeDetails, route }) {
   const [messageShare, setMessageShare] = useState('');
@@ -89,29 +90,32 @@ function ShareFavRecipeBtn({ recipeDetails, route }) {
   return (
     <div>
       <span>{ messageShare }</span>
-      <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ handleShareClick }
-      >
-        <img src={ imageShare } alt="share" />
-      </button>
-      <button
-        type="button"
-        // data-testid="favorite-btn"
-        onClick={ handleFavoriteClick }
-      >
-        {isFavorite && <img
-          data-testid="favorite-btn"
-          src={ blackHeartIcon }
-          alt="favorite"
-        />}
-        {!isFavorite && <img
-          data-testid="favorite-btn"
-          src={ whiteHeartIcon }
-          alt="favorite"
-        />}
-      </button>
+      <div className="container-btns">
+        <button
+          type="button"
+          data-testid="share-btn"
+          onClick={ handleShareClick }
+        >
+          <img src={ imageShare } alt="share" />
+        </button>
+        <button
+          type="button"
+          // data-testid="favorite-btn"
+          onClick={ handleFavoriteClick }
+        >
+          {isFavorite && <img
+            data-testid="favorite-btn"
+            src={ blackHeartIcon }
+            alt="favorite"
+          />}
+          {!isFavorite && <img
+            data-testid="favorite-btn"
+            src={ whiteHeartIcon }
+            alt="favorite"
+            className="btns"
+          />}
+        </button>
+      </div>
     </div>
   );
 }

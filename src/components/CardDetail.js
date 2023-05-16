@@ -8,11 +8,6 @@ function CardDetail({ dataDetails, route, recomendations }) {
   const [doneRecipe, setDoneRecipe] = useState(false);
   const [inProgressRecipe, setInProgressRecipe] = useState(false);
   const NUMBER = 13;
-  const styleImage = {
-    width: '300px',
-    height: '300px',
-    border: '1px solid black',
-  };
 
   const getDoneRecipe = useCallback(() => {
     const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes') || '[]');
@@ -61,10 +56,16 @@ function CardDetail({ dataDetails, route, recomendations }) {
                 src={ dataDetails.strMealThumb }
                 alt={ dataDetails.strMeal }
                 data-testid="recipe-photo"
-                style={ styleImage }
+                className="img-detail"
               />
               <ShareFavRecipeBtn recipeDetails={ dataDetails } route={ route } />
-              <h1 data-testid="recipe-title">{ dataDetails.strMeal }</h1>
+              <h1
+                data-testid="recipe-title"
+                className="title-recipe"
+              >
+                { dataDetails.strMeal }
+
+              </h1>
               <h2 data-testid="recipe-category">{ dataDetails.strCategory }</h2>
             </>
           )}
@@ -74,10 +75,16 @@ function CardDetail({ dataDetails, route, recomendations }) {
                 data-testid="recipe-photo"
                 src={ dataDetails.strDrinkThumb }
                 alt={ dataDetails.strDrink }
-                style={ styleImage }
+                className="img-detail"
               />
               <ShareFavRecipeBtn recipeDetails={ dataDetails } route={ route } />
-              <h1 data-testid="recipe-title">{ dataDetails.strDrink }</h1>
+              <h1
+                data-testid="recipe-title"
+                className="title-recipe"
+              >
+                { dataDetails.strDrink }
+
+              </h1>
               <h2 data-testid="recipe-category">{ dataDetails.strAlcoholic }</h2>
             </>
           )}

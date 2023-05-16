@@ -1,31 +1,59 @@
-footer {
-  position: fixed;
-}
+@media ( max-width : 480px ) {
 
-.btn-start {
-  background-color: red;
-  border-radius: 10px;
-  bottom: 0;
-  color: white;
-  font-size: 20px;
-  height: 50px;
-  position: fixed;
-  right: 0;
-  width: 100%;
-}
+  footer {
+    position: fixed;
+  }
 
-.carousel {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 10px;
-  margin-bottom: 50px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-}
+  .btn-start {
+    background-color: #fcc436;
+    border-radius: 10px;
+    bottom: 0;
+    color: #41197f;
+    font-size: 20px;
+    font-weight: 800;
+    height: 50px;
+    position: fixed;
+    right: 0;
+    width: 100%;
+  }
 
-.image-recomendation {
-  height: 175px;
-  object-fit: cover;
-  scroll-snap-align: start;
-  width: 175px;
+  .carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    margin-bottom: 50px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .image-recomendation {
+    height: 175px;
+    object-fit: cover;
+    scroll-snap-align: start;
+    width: 175px;
+  }
+
+  .img-detail {
+    height: 100vw;
+    width: 100vw;
+  }
+
+  .container-btns {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    top: 83vw;
+  }
+
+  .title-recipe {
+    color: #41197f;
+    font-size: 25px;
+    margin-top: 10px;
+    padding-left: 10px;
+    text-align: left;
+  }
+
+  .btns {
+    background-color: #fcc436;
+  }
 }
