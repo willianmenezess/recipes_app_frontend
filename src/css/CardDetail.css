@@ -46,7 +46,7 @@
     width: 100vw;
   }
 
-  .title-recipe {
+  .title-recipe-details {
     color: black;
     font-size: 25px;
     margin-top: 10px;
@@ -72,7 +72,7 @@
     padding-left: 10px;
   }
 
-  p {
+  .p-instruction {
     padding-left: 10px;
     padding-right: 10px;
     text-align: justify;

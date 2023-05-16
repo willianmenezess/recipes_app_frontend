@@ -61,7 +61,7 @@ function CardDetail({ dataDetails, route, recomendations }) {
               <ShareFavRecipeBtn recipeDetails={ dataDetails } route={ route } />
               <h1
                 data-testid="recipe-title"
-                className="title-recipe"
+                className="title-recipe-details"
               >
                 { dataDetails.strMeal }
 
@@ -86,7 +86,7 @@ function CardDetail({ dataDetails, route, recomendations }) {
               <ShareFavRecipeBtn recipeDetails={ dataDetails } route={ route } />
               <h1
                 data-testid="recipe-title"
-                className="title-recipe"
+                className="title-recipe-details"
               >
                 { dataDetails.strDrink }
 
@@ -119,7 +119,13 @@ function CardDetail({ dataDetails, route, recomendations }) {
               })}
           </ul>
           <h3>Instructions</h3>
-          <p data-testid="instructions">{ dataDetails.strInstructions }</p>
+          <p
+            data-testid="instructions"
+            className="p-instruction"
+          >
+            { dataDetails.strInstructions }
+
+          </p>
           { dataDetails.strYoutube && (<iframe
             data-testid="video"
             title="video"
