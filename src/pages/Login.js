@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import logoApp from '../images/logo Recipes App.svg';
+import tomate from '../images/tomate.svg';
 import '../css/Login.css';
 
 function Login() {
@@ -36,7 +37,9 @@ function Login() {
     <section className="login">
       <div className="background-login" />
       <div className="logo-recipes"><img src={ logoApp } alt="logo" /></div>
-      <form>
+      <img src={ tomate } alt="tomate" className="tomate-img" />
+      <form className="login-form">
+        {/* <h1>Login</h1> */}
         <label htmlFor="email">
           <input
             type="email"
@@ -49,7 +52,6 @@ function Login() {
             className="email-input"
           />
         </label>
-        <br />
         <label htmlFor="password">
           <input
             type="password"
@@ -62,12 +64,12 @@ function Login() {
             className="pass-input"
           />
         </label>
-        <br />
         <button
           type="submit"
           data-testid="login-submit-btn"
           disabled={ isDisabled }
           onClick={ handleSubmit }
+          className="btn-submit"
         >
           Enter
 

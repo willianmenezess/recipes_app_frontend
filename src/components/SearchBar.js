@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AppContext } from '../contexts/AppProvider';
 import { searchBarDrinks, searchBarMeals } from '../services/fetchApi';
+import '../css/SearchBar.css';
 
 function SearchBar() {
   const [text, setText] = useState('');
@@ -49,17 +50,19 @@ function SearchBar() {
   };
 
   return (
-    <div>
-      <form onSubmit={ handleSearch }>
-        <input
-          data-testid="search-input"
-          type="text"
-          value={ text }
-          onChange={ ({ target }) => setText(target.value) }
-        />
+    <form className="search-bar-form" onSubmit={ handleSearch }>
+      <input
+        placeholder="Search"
+        className="input-search"
+        data-testid="search-input"
+        type="text"
+        value={ text }
+        onChange={ ({ target }) => setText(target.value) }
+      />
+      <div className="container-radius-search">
         <label htmlFor="ingredient">
           <input
-            // defaultChecked
+          // defaultChecked
             type="radio"
             id="ingredient"
             data-testid="ingredient-search-radio"
@@ -91,15 +94,16 @@ function SearchBar() {
           />
           First Letter
         </label>
-        <button
-          data-testid="exec-search-btn"
-          type="submit"
-          disabled={ search === '' }
-        >
-          Search
-        </button>
-      </form>
-    </div>
+      </div>
+      <button
+        className="search-btn"
+        data-testid="exec-search-btn"
+        type="submit"
+        disabled={ search === '' }
+      >
+        Search
+      </button>
+    </form>
   );
 }
 

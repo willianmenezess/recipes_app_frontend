@@ -1,0 +1,30 @@
+footer {
+  align-items: center;
+  background: #fcc436;
+  bottom: 0;
+  box-shadow: 1px -3px 10px rgb(249, 245, 245);
+  box-sizing: border-box;
+  display: flex;
+  height: 52px;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 10px;
+  position: absolute;
+  transition: all 500ms;
+  width: 100%;
+}
+
+.icon {
+  background-color: transparent;
+  border: 1px solid #3b023b;
+  border-radius: 35px;
+  bottom: 1.15%;
+  color: rgb(249, 245, 245);
+  cursor: pointer;
+  font-size: 2px;
+  left: 10%;
+  margin: 10px;
+  right: 83.16%;
+  top: 95.71%;
+}
+

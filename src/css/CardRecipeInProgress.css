@@ -1,0 +1,104 @@
+@media ( max-width : 480px ) {
+
+
+  .category-start {
+    color: white;
+    position: fixed;
+  }
+
+  .container-share-favorite {
+    position: fixed;
+    right: 0;
+    top: 0;
+  }
+
+  .iconBtn-inprogress {
+    background-color: transparent;
+  }
+
+  .imag {
+    height: 200px;
+    left: -1px;
+    width: 362.01px;
+
+  }
+
+  .title {
+    color: white;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 900;
+    height: 42px;
+    left: 110.01px;
+    letter-spacing: 0.105em;
+    line-height: 20px;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    top: 150px;
+    width: 147px;
+  }
+
+  h3 {
+    align-items: end;
+    font-size: 20px;
+    font-style: bold;
+    line-height: 100%;
+    vertical-align: top;
+  }
+
+  .border {
+    border: 1px solid #888585;
+    border-width: 3px;
+  }
+
+  .checkbox {
+    color: rgb(235, 33, 11);
+  }
+
+  /* input[ type = 'checkbox' ] {
+    appearance: none;
+    border: 2px solid #fcc436;
+    border-radius: 30px;
+    cursor: pointer;
+    height: 16px;
+    outline: none;
+    width: 16px;
+  }
+
+  input[ type = 'checkbox' ]:checked:before {
+    background-color: #41197f; /* Define a cor desejada
+    border-radius: 30px;
+    content: '';
+    display: block;
+    height: 10px;
+    margin: 1px;
+    width: 10px;
+  } */
+
+
+  .instruction {
+    border: 1px solid #888585;
+    border-width: 3px;
+  }
+
+  .paragraph {
+    font-size: 16px;
+    font-style: bold;
+    margin: 2%;
+    text-align: justify;
+  }
+
+
+  .finalizarBtn {
+    background-color: rgb(239, 218, 33);
+    border-color: #41197f;
+    border-radius: 10px;
+    bottom: 0;
+    font-size: 20px;
+    height: 50px;
+    position: fixed;
+    right: 0;
+    width: 100%;
+  }
+}
