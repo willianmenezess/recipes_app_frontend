@@ -91,18 +91,35 @@ function DoneRecipes() {
                 data-testid={ `${index}-horizontal-image` }
               />
             </a>
-            <div>
-              <Link
-                style={ { textDecoration: 'none', color: 'black' } }
-                to={ `/${recipe.type}s/${recipe.id}` }
+            <div
+              className="done-recipes-text-container"
+            >
+              <div
+                className="done-recipes-title-container"
               >
-                <h3
-                  className="done-recipes-title"
-                  data-testid={ `${index}-horizontal-name` }
+                <Link
+                  style={ { textDecoration: 'none', color: 'black' } }
+                  to={ `/${recipe.type}s/${recipe.id}` }
                 >
-                  {recipe.name}
-                </h3>
-              </Link>
+                  <h3
+                    className="done-recipes-title"
+                    data-testid={ `${index}-horizontal-name` }
+                  >
+                    {recipe.name}
+                  </h3>
+                </Link>
+                <button
+                  type="button"
+                  className="share-btn"
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  src={ shareIcon }
+                  onClick={ () => shareRecipe(recipe.id, recipe.type) }
+                >
+                  <img src={ shareIcon } alt="share-button" />
+                </button>
+
+                {copied && <span>Link copied!</span>}
+              </div>
               <div
                 className="done-recipes-category-container"
               >
@@ -111,8 +128,9 @@ function DoneRecipes() {
                   data-testid={ `${index}-horizontal-top-text` }
                 >
                   {recipe.type === 'meal'
-                    ? `${recipe.nationality} ${recipe.category}`
-                    : `${recipe.nationality} ${recipe.category} ${recipe.alcoholicOrNot}`}
+                    ? `${recipe.nationality} - ${recipe.category}`
+                    : `${recipe.nationality} - ${recipe.category} 
+                    - ${recipe.alcoholicOrNot}`}
                 </p>
                 <p
                   className="done-recipes-date"
@@ -129,18 +147,6 @@ function DoneRecipes() {
                     {tag}
                   </span>
                 ))}
-                <button
-                  type="button"
-                  className="share-btn"
-                  data-testid={ `${index}-horizontal-share-btn` }
-                  src={ shareIcon }
-                  onClick={ () => shareRecipe(recipe.id, recipe.type) }
-                >
-                  <img src={ shareIcon } alt="share-button" />
-                </button>
-
-                {copied && <span>Link copied!</span>}
-
               </div>
             </div>
           </div>
