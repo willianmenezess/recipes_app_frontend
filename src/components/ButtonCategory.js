@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { AppContext } from '../contexts/AppProvider';
+import '../css/Recipes.css';
 
 function ButtonCategory({ category }) {
   const { filterByCategory, filterAllCategories, wasClicked,
@@ -22,6 +23,7 @@ function ButtonCategory({ category }) {
   return (
     <section>
       <button
+        className="btn-category"
         type="button"
         data-testid={ `${category}-category-filter` }
         onClick={ handleFilter }

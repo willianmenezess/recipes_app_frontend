@@ -6,6 +6,7 @@ import { AppContext } from '../contexts/AppProvider';
 import blackFavIcon from '../images/blackHeartIcon.svg';
 import shareIconSvg from '../images/shareIcon.svg';
 import whiteFavIcon from '../images/whiteHeartIcon.svg';
+import '../css/CardRecipeInProgress.css';
 
 function CardRecipeInProgress() {
   const { fetchData } = useContext(AppContext);
@@ -160,26 +161,41 @@ function CardRecipeInProgress() {
 
   return (
     <section>
+      <div className="category-start">
+        <div data-testid="recipe-category">
+          { recipeData.strCategory }
+        </div>
+      </div>
+      <div className="container-share-favorite">
+        <button
+          className="iconBtn-inprogress"
+          data-testid="share-btn"
+          onClick={ handleShare }
+        >
+          <img src={ shareIconSvg } alt="share" />
+        </button>
+        <button
+          className="iconBtn-inprogress"
+          data-testid="favorite-btn"
+          onClick={ isFavorite ? handleUnfavorite : handleFavorite }
+          src={ isFavorite ? blackFavIcon : whiteFavIcon }
+        >
+          { isFavorite
+            ? <img src={ blackFavIcon } alt="favorite" />
+            : <img src={ whiteFavIcon } alt="favorite" />}
+        </button>
+      </div>
       <img
-        width="150"
-        height="150"
+        className="imag"
         data-testid="recipe-photo"
         src={ recipeData.strDrinkThumb
           ? recipeData.strDrinkThumb : recipeData.strMealThumb }
         alt="imagem"
       />
-      <div data-testid="recipe-title">
-        { recipeData.strDrink ? recipeData.strDrink : recipeData.strMeal }
-      </div>
-      <div data-testid="recipe-category">
-        { recipeData.strCategory }
-      </div>
-      <div data-testid="instructions">
-        { recipeData.strInstructions }
-      </div>
       <h3>Ingredients</h3>
-
-      <div>
+      <div
+        className="border"
+      >
         { ingredientsAndMeasures.map((item, index) => (
           <p
             key={ index }
@@ -199,7 +215,23 @@ function CardRecipeInProgress() {
           </p>
         )) }
       </div>
+      <div
+        className="title"
+        data-testid="recipe-title"
+      >
+        { recipeData.strDrink ? recipeData.strDrink : recipeData.strMeal }
+      </div>
+      <br />
+      <h3>instructions</h3>
+      <div className="instruction">
+        <div className="paragraph">
+          <div data-testid="instructions">
+            { recipeData.strInstructions }
+          </div>
+        </div>
+      </div>
       <button
+        className="finalizarBtn"
         data-testid="finish-recipe-btn"
         disabled={ isFinishDisabled }
         onClick={ handleFinishRecipe }
@@ -208,21 +240,6 @@ function CardRecipeInProgress() {
       </button>
       <br />
       { copied && <p>Link copied!</p> }
-      <button
-        data-testid="share-btn"
-        onClick={ handleShare }
-      >
-        <img src={ shareIconSvg } alt="share" />
-      </button>
-      <button
-        data-testid="favorite-btn"
-        onClick={ isFavorite ? handleUnfavorite : handleFavorite }
-        src={ isFavorite ? blackFavIcon : whiteFavIcon }
-      >
-        { isFavorite
-          ? <img src={ blackFavIcon } alt="favorite" />
-          : <img src={ whiteFavIcon } alt="favorite" />}
-      </button>
     </section>
   );
 }
