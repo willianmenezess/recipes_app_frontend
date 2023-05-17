@@ -1,0 +1,58 @@
+.buttons-container {
+  display: flex;
+  gap: 5px;
+}
+
+.header-buttons {
+  align-items: center;
+  background-color: #fcdc36;
+  box-sizing: border-box;
+  display: flex;
+  height: 52px;
+  justify-content: space-between;
+  padding: 0 15px;
+  width: 100vw;
+}
+
+.title-container {
+  color: #41197f;
+  display: flex;
+  gap: 15px;
+}
+
+.title-container span {
+  font-weight: 700;
+}
+
+.icon-recipe > img {
+  height: 35px;
+}
+
+.header-buttons button {
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+header > h1 {
+  color: #41197f;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.105em;
+  line-height: 20px;
+  margin-top: 8px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.icon-recipe {
+  display: flex;
+}
+
+.fork-kinife {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}

@@ -155,7 +155,6 @@ function CardDetail({ dataDetails, route, recomendations }) {
                     data-testid={ `${index}-recommendation-title` }
                   >
                     { recipe.strMeal }
-
                   </p>
                 </div>
               ))
@@ -176,7 +175,6 @@ function CardDetail({ dataDetails, route, recomendations }) {
                     data-testid={ `${index}-recommendation-title` }
                   >
                     { recipe.strDrink }
-
                   </p>
                 </div>
               ))
