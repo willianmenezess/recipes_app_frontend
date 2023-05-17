@@ -1,0 +1,124 @@
+.done-recipes-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 640px;
+    background: #E5E5E5;
+}
+
+.done-recipes-image {
+    width: 151px;
+    height: 135px;
+    border-radius: 5px 0px 0px 5px;
+    margin-top: 3px;
+    margin-left: 29px;
+}
+
+.done-recipes-text-container {
+    margin-left: 10px;
+}
+
+.done-recipes-button {
+    color: #41197f;
+    font-family: Montserrat;
+    background-color: #fcdc36;
+    border: none;
+    font-weight: 800;
+    border-radius: 5px;
+    padding: 7px;
+}
+
+.done-recipes-buttons-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 45px;
+    margin-bottom: 5px;
+}
+
+.done-recipes-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    height: 135px;
+    background: #FFFFFF;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.done-recipes-title-container {
+    display: flex;
+    align-items: center;
+    margin-left: 35px;
+}
+
+.done-recipes-category-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    height: 120px;
+}
+
+.done-recipes-title {
+    display: inline-block;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    margin-top: 35px;
+    font-size: 12px;
+    line-height: 1px;
+    color: #333333;
+}
+
+.share-btn {
+    display: inline-block;
+    height: 28px;
+    margin-top: 25px;
+    margin-left: 30px;
+    background: #FFFFFF;
+    border: 0.517989px solid #B1B1B1;
+    border-radius: 5px;
+}
+
+.done-recipes-category {
+    width: 200px;
+    height: 18px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 10px;
+    color: #333333;
+}
+
+.done-recipes-date {
+    width: 200px;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 11px;
+    margin-top: 0;
+    color: #333333;
+}
+
+.done-recipes-tag {
+    width: 200px;
+    height: 18px;
+    left: 19px;
+    top: 317;
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 1px;
+    color: #333333;
+}
+
+.imageIcon {
+    display: flex;
+    height: 35px;
+    margin-left: 10px;
+}
