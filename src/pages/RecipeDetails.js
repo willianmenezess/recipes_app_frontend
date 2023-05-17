@@ -16,7 +16,6 @@ function RecipeDetails() {
     const URL_DETAILS_DRINK = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
     const URL_RECOMENDATIONS_MEAL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
     const URL_RECOMENDATIONS_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-
     const NUMBER_RECOMENDATIONS = 6;
     if (pathname === `/meals/${id}`) {
       const dataDetailss = await fetchData(URL_DETAILS_MEAL);
@@ -54,9 +53,7 @@ function RecipeDetails() {
           recomendations={ dataRecomendations }
         />
       )}
-
     </section>
   );
 }
-
 export default RecipeDetails;
