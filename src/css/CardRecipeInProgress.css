@@ -1,6 +1,23 @@
 @media ( max-width : 480px ) {
 
 
+    .category-start{
+        position: absolute;
+        font-family: 'Epilogue';
+        font-size: 20px;
+        color: #FFFFFF;
+    }
+
+    .container-share-favorite {
+        position:fixed;
+        top: 0;
+        right: 0;
+    }
+    .iconBtn-inprogress {
+        background-color: transparent;
+
+    }
+
     .imag {
     width: 362.01px;
     height: 200px;
@@ -88,4 +105,19 @@ input[type="checkbox"] {
     text-align: justify;
     margin: 2%;
   }
+
+
+  .finalizarBtn {
+        background-color: rgb(239, 218, 33);
+        border-radius: 10px;
+        border-color: #41197f;
+        bottom: 0;
+        color: 41197f;
+        font-size: 20px;
+        height: 50px;
+        position: fixed;
+        right: 0;
+        width: 100%; 
+   }
+ 
 }
