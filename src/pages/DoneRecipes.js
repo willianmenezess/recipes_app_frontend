@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Header from '../components/Header';
 import '../css/DoneRecipes.css';
 import bowlIcon from '../images/bowl-food.svg';
-import drinkIconSvg from '../images/drinkIcon.svg';
-import mealIconSvg from '../images/mealIcon.svg';
+import cupDrink from '../images/cupDrink.svg';
+import forkKinife from '../images/forkKinife.svg';
 import shareIcon from '../images/shareIcon.svg';
 
 function DoneRecipes() {
@@ -45,31 +45,34 @@ function DoneRecipes() {
         className="done-recipes-buttons-container"
       >
         <div>
-          <img src={ bowlIcon } alt="" width="41px" />
+          <img src={ bowlIcon } alt="" className="imageIcon" />
           <br />
           <button
             data-testid="filter-by-all-btn"
             onClick={ () => filterRecipes('all') }
+            className="done-recipes-button"
           >
             All
           </button>
         </div>
         <div>
-          <img src={ mealIconSvg } alt="" />
+          <img src={ forkKinife } alt="" className="imageIcon" />
           <br />
           <button
             data-testid="filter-by-meal-btn"
             onClick={ () => filterRecipes('meal') }
+            className="done-recipes-button"
           >
             Meals
           </button>
         </div>
         <div>
-          <img src={ drinkIconSvg } alt="" />
+          <img src={ cupDrink } alt="" className="imageIcon" />
           <br />
           <button
             data-testid="filter-by-drink-btn"
             onClick={ () => filterRecipes('drink') }
+            className="done-recipes-button"
           >
             Drinks
           </button>
