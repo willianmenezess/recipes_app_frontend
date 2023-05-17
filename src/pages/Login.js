@@ -38,7 +38,7 @@ function Login() {
       <div className="background-login" />
       <div className="logo-recipes"><img src={ logoApp } alt="logo" /></div>
       <img src={ tomate } alt="tomate" className="tomate-img" />
-      <form>
+      <form className="login-form">
         {/* <h1>Login</h1> */}
         <label htmlFor="email">
           <input
