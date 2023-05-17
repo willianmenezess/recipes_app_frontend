@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Header from '../components/Header';
 import '../css/DoneRecipes.css';
+import bowlIcon from '../images/bowl-food.svg';
 import drinkIconSvg from '../images/drinkIcon.svg';
 import mealIconSvg from '../images/mealIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
@@ -44,7 +45,7 @@ function DoneRecipes() {
         className="done-recipes-buttons-container"
       >
         <div>
-          <img src={ mealIconSvg } alt="" />
+          <img src={ bowlIcon } alt="" width="41px" />
           <br />
           <button
             data-testid="filter-by-all-btn"
@@ -129,8 +130,8 @@ function DoneRecipes() {
                 >
                   {recipe.type === 'meal'
                     ? `${recipe.nationality} - ${recipe.category}`
-                    : `${recipe.nationality} - ${recipe.category} 
-                    - ${recipe.alcoholicOrNot}`}
+                    : `${recipe.category} 
+                    - ${recipe.alcoholicOrNot} - ${recipe.nationality}`}
                 </p>
                 <p
                   className="done-recipes-date"
