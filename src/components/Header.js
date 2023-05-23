@@ -42,18 +42,15 @@ function Header({ title, searchIconToggle }) {
       <div className="fork-kinife">
         <div className="icon-recipe">
           { title === 'Meals'
-            ? (
-              <img
-                alt="fork-kinife"
-                src={ forkKinife }
-              />
-            )
-            : (
-              <img
+            && <img
+              alt="fork-kinife"
+              src={ forkKinife }
+            />}
+          { title === 'Drinks'
+              && <img
                 alt="cup-drink"
                 src={ cupDrink }
-              />
-            ) }
+              />}
         </div>
       </div>
       <h1 data-testid="page-title">
