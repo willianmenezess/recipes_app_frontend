@@ -7,13 +7,15 @@
   }
 
   .container-share-favorite {
-    position: fixed;
-    right: 0;
-    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    top: 42vw;
+    width: 100vw;
   }
 
   .iconBtn-inprogress {
-    background-color: transparent;
+    border-radius: 5px;
   }
 
   .imag {
@@ -80,12 +82,14 @@
   .instruction {
     border: 1px solid #888585;
     border-width: 3px;
+    margin-bottom: 50px;
   }
 
   .paragraph {
     font-size: 16px;
     font-style: bold;
     margin: 2%;
+    padding: 7px;
     text-align: justify;
   }
 
@@ -100,5 +104,11 @@
     position: fixed;
     right: 0;
     width: 100%;
+  }
+
+  .copied-msg {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
   }
 }

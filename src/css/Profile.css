@@ -1,0 +1,52 @@
+@media ( max-width : 480px ) {
+
+  .icon-profile {
+    width: 35px;
+  }
+
+  .container-icon-email {
+    align-items: center;
+    display: flex;
+    flex-flow: column;
+    font-weight: 700;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .container-btns-profile {
+    align-items: start;
+    display: flex;
+    flex-flow: column;
+    gap: 7px;
+    justify-content: center;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 25%;
+    width: 100vw;
+  }
+
+  .btn-profile {
+    background-color: white;
+    border: none;
+    color: black;
+    font-family: fantasy;
+    font-size: larger;
+    padding: 15px;
+  }
+
+  .container-done-profile {
+    display: flex;
+    justify-content: center;
+  }
+
+  .container-fav-profile {
+    display: flex;
+    justify-content: center;
+  }
+
+  .container-signOut-profile {
+    display: flex;
+    justify-content: center;
+  }
+
+}

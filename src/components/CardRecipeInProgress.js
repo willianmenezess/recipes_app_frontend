@@ -192,6 +192,7 @@ function CardRecipeInProgress() {
           ? recipeData.strDrinkThumb : recipeData.strMealThumb }
         alt="imagem"
       />
+      { copied && <p className="copied-msg">Link copied!</p> }
       <h3>Ingredients</h3>
       <div
         className="border"
@@ -239,7 +240,6 @@ function CardRecipeInProgress() {
         Finalizar Receita
       </button>
       <br />
-      { copied && <p>Link copied!</p> }
     </section>
   );
 }
