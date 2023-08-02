@@ -106,7 +106,7 @@ npm run lint
 
 ## Usando o Trello como ferramenta kanban
 
-Na organização das tarefas foi utilizado o modelo kanban, através da ferramenta "Trello", para garantir que todos tivessem suas tarefas bem definidas e que a qualidade e a organização do projeto como um todo se mantivesse. Além de fazer com que o proceso de desenvolvimento fosse mais ágil e acertivo.
+Na organização das tarefas foi utilizado o modelo kanban, através da ferramenta "Trello", para garantir que todos tivessem suas tarefas bem definidas e que a qualidade e a organização do projeto como um todo se mantivesse, além de fazer com que o processo de desenvolvimento fosse mais ágil e assertivo.
 
 ---
 
